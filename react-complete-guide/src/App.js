@@ -31,7 +31,13 @@ class App extends Component {
         { name: event.target.value, age: 29 },
         { name: "Stephanie", age: 26 },
       ],
+      otherState: "some other value",
+      showPersons: false,
     });
+  };
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
   };
 
   render() {
@@ -43,35 +49,25 @@ class App extends Component {
       cursor: "pointer",
       boxShadow: "0 1px 3px black",
     };
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person) => {
+            return <Person name={person.name} age={person.age} />;
+          })}
+        </div>
+      );
+    }
 
     return (
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button
-          style={style}
-          onClick={() => this.switchNameHandler("Maximillian!!")}
-        >
-          Switch Name
+        <button style={style} onClick={() => this.togglePersonHandler()}>
+          Toggle Person
         </button>
-        <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "Max!")}
-            changed={this.nameChangedHandler}
-          >
-            My hobbies: Racing
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          />
-        </div>
+        {persons}
       </div>
     );
   }
