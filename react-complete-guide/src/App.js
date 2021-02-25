@@ -24,20 +24,16 @@ class App extends Component {
     });
   };
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: "Max", age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: "Stephanie", age: 26 },
-      ],
-      otherState: "some other value",
-      showPersons: false,
-    });
-  };
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
+  };
+  deletePersonHandler = (personIndex) => {
+    // always create a copy ofthe state array
+    //const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
   };
 
   render() {
@@ -53,8 +49,14 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person) => {
-            return <Person name={person.name} age={person.age} />;
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+              />
+            );
           })}
         </div>
       );
@@ -64,7 +66,7 @@ class App extends Component {
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button style={style} onClick={() => this.togglePersonHandler()}>
+        <button style={style} onClick={this.togglePersonHandler}>
           Toggle Person
         </button>
         {persons}
