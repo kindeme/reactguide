@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import styled from "styled-components";
 import "./Person/Person.css";
+
+const StyleButton = styled.button`
+      background-color: green;
+      font: inherit;
+      color:white
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+      &:hover: {
+        background-color: lightgreen;
+        color: black;`;
 
 class App extends Component {
   state = {
@@ -82,11 +94,11 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "green";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black",
-      };
+      // style.backgroundColor = "green";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
     }
     let classes = [];
 
@@ -100,9 +112,9 @@ class App extends Component {
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p className={classes.join(" ")}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonHandler}>
+        <StyleButton onClick={this.togglePersonHandler}>
           Toggle Person
-        </button>
+        </StyleButton>
         {persons}
       </div>
     );
