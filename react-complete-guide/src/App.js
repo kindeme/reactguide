@@ -4,17 +4,6 @@ import Person from "./Person/Person";
 import styled from "styled-components";
 import "./Person/Person.css";
 
-const StyleButton = styled.button`
-      background-color: green;
-      font: inherit;
-      color:white
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      &:hover: {
-        background-color: lightgreen;
-        color: black;`;
-
 class App extends Component {
   state = {
     persons: [
@@ -65,18 +54,6 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "white",
-      font: "inherit",
-      border: "2px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      boxShadow: "0 1px 3px black",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -112,9 +89,9 @@ class App extends Component {
       <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p className={classes.join(" ")}>This is really working!</p>
-        <StyleButton onClick={this.togglePersonHandler}>
+        <button className="button" onClick={this.togglePersonHandler}>
           Toggle Person
-        </StyleButton>
+        </button>
         {persons}
       </div>
     );
