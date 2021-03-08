@@ -12,7 +12,7 @@
   font-weight: bold;
 }
 
-.button {
+.Button {
   background-color: green;
   font: inherit;
   color: white;
@@ -21,7 +21,7 @@
   cursor: pointer;
 }
 
-.button:hover {
+.Button:hover {
   background-color: lightgreen;
   color: black;
 }

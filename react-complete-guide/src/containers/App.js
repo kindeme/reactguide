@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
-import Person from "./Person/Person";
-import styled from "styled-components";
-import "./Person/Person.css";
+import classes from "./App.css";
+import Person from "./Persons/Person/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import "../components/Persons/Person/Person.css";
 
 class App extends Component {
   state = {
@@ -55,6 +55,8 @@ class App extends Component {
 
   render() {
     let persons = null;
+    let btnClass = "";
+
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -63,33 +65,30 @@ class App extends Component {
               <Person
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
-                age={person.age}
                 key={person.id}
+                age={person.age}
                 changed={(event) => this.nameChangeHandler(event, person.id)}
               />
             );
           })}
         </div>
       );
-      // style.backgroundColor = "green";
-      // style[":hover"] = {
-      //   backgroundColor: "salmon",
-      //   color: "black",
-      // };
+      btnClass = classes.red;
     }
-    let classes = [];
+
+    let assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push("red"); // classes =['red'];
+      assignedClasses.push(classes.red); // classes =['red'];
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold"); // classes = ['red','bold]
+      assignedClasses.push(classes.bold); // classes = ['red','bold]
     }
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1> Hi, I'm a React App</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <button className="button" onClick={this.togglePersonHandler}>
+        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        <button className={btnClass} onClick={this.togglePersonHandler}>
           Toggle Person
         </button>
         {persons}
